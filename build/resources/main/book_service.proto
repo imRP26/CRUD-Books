@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package traceable.crudbook;
+
+option java_package = "com.github.traceable.crudbook.pb";
+option java_multiple_files = true;
+
+import "book_message.proto";
+import "filter_message.proto";
+
+message CreateBookRequest {
+    Book book = 1;
+}
+
+message CreateBookResponse {
+    string isbn = 1;
+}
+
+message SearchBookRequest {
+    Filter filter = 1;
+}
+
+message SearchBookResponse {
+    Book book = 1;
+}
+
+service BookService {
+    // unary RPC
+    rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {};
+
+    // server-streaming RPC
+    rpc SearchBook(SearchBookRequest) returns (stream SearchBookResponse) {};
+}

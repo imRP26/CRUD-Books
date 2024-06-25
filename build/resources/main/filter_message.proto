@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package traceable.crudbook;
+
+option java_package = "com.github.traceable.crudbook.pb";
+option java_multiple_files = true;
+
+message Filter {
+    uint32 min_page_count = 1;
+}

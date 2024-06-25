@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package traceable.crudbook;
+
+option java_package = "com.github.traceable.crudbook.pb";
+option java_multiple_files = true;
+
+message Book {
+    string isbn = 1;
+    string title = 2;
+    repeated string authors = 3;
+    uint32 page_count = 4;
+}
