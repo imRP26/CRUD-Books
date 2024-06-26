@@ -77,6 +77,68 @@ public final class BookServiceGrpc {
     return getSearchBookMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.github.traceable.crudbook.pb.DeleteBookRequest,
+      com.github.traceable.crudbook.pb.DeleteBookResponse> getDeleteBookMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteBook",
+      requestType = com.github.traceable.crudbook.pb.DeleteBookRequest.class,
+      responseType = com.github.traceable.crudbook.pb.DeleteBookResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.github.traceable.crudbook.pb.DeleteBookRequest,
+      com.github.traceable.crudbook.pb.DeleteBookResponse> getDeleteBookMethod() {
+    io.grpc.MethodDescriptor<com.github.traceable.crudbook.pb.DeleteBookRequest, com.github.traceable.crudbook.pb.DeleteBookResponse> getDeleteBookMethod;
+    if ((getDeleteBookMethod = BookServiceGrpc.getDeleteBookMethod) == null) {
+      synchronized (BookServiceGrpc.class) {
+        if ((getDeleteBookMethod = BookServiceGrpc.getDeleteBookMethod) == null) {
+          BookServiceGrpc.getDeleteBookMethod = getDeleteBookMethod =
+              io.grpc.MethodDescriptor.<com.github.traceable.crudbook.pb.DeleteBookRequest, com.github.traceable.crudbook.pb.DeleteBookResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteBook"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.github.traceable.crudbook.pb.DeleteBookRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.github.traceable.crudbook.pb.DeleteBookResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BookServiceMethodDescriptorSupplier("DeleteBook"))
+              .build();
+        }
+      }
+    }
+    return getDeleteBookMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.github.traceable.crudbook.pb.UpdateBookRequest,
+      com.github.traceable.crudbook.pb.UpdateBookResponse> getUpdateBookMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateBook",
+      requestType = com.github.traceable.crudbook.pb.UpdateBookRequest.class,
+      responseType = com.github.traceable.crudbook.pb.UpdateBookResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.github.traceable.crudbook.pb.UpdateBookRequest,
+      com.github.traceable.crudbook.pb.UpdateBookResponse> getUpdateBookMethod() {
+    io.grpc.MethodDescriptor<com.github.traceable.crudbook.pb.UpdateBookRequest, com.github.traceable.crudbook.pb.UpdateBookResponse> getUpdateBookMethod;
+    if ((getUpdateBookMethod = BookServiceGrpc.getUpdateBookMethod) == null) {
+      synchronized (BookServiceGrpc.class) {
+        if ((getUpdateBookMethod = BookServiceGrpc.getUpdateBookMethod) == null) {
+          BookServiceGrpc.getUpdateBookMethod = getUpdateBookMethod =
+              io.grpc.MethodDescriptor.<com.github.traceable.crudbook.pb.UpdateBookRequest, com.github.traceable.crudbook.pb.UpdateBookResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateBook"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.github.traceable.crudbook.pb.UpdateBookRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.github.traceable.crudbook.pb.UpdateBookResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new BookServiceMethodDescriptorSupplier("UpdateBook"))
+              .build();
+        }
+      }
+    }
+    return getUpdateBookMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -144,6 +206,26 @@ public final class BookServiceGrpc {
         io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.SearchBookResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchBookMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    default void deleteBook(com.github.traceable.crudbook.pb.DeleteBookRequest request,
+        io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.DeleteBookResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteBookMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    default void updateBook(com.github.traceable.crudbook.pb.UpdateBookRequest request,
+        io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.UpdateBookResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateBookMethod(), responseObserver);
+    }
   }
 
   /**
@@ -194,6 +276,28 @@ public final class BookServiceGrpc {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchBookMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    public void deleteBook(com.github.traceable.crudbook.pb.DeleteBookRequest request,
+        io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.DeleteBookResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteBookMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    public void updateBook(com.github.traceable.crudbook.pb.UpdateBookRequest request,
+        io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.UpdateBookResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateBookMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -232,6 +336,26 @@ public final class BookServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchBookMethod(), getCallOptions(), request);
     }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    public com.github.traceable.crudbook.pb.DeleteBookResponse deleteBook(com.github.traceable.crudbook.pb.DeleteBookRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteBookMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    public com.github.traceable.crudbook.pb.UpdateBookResponse updateBook(com.github.traceable.crudbook.pb.UpdateBookRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateBookMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -260,10 +384,34 @@ public final class BookServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCreateBookMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.github.traceable.crudbook.pb.DeleteBookResponse> deleteBook(
+        com.github.traceable.crudbook.pb.DeleteBookRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteBookMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * unary RPC
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.github.traceable.crudbook.pb.UpdateBookResponse> updateBook(
+        com.github.traceable.crudbook.pb.UpdateBookRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateBookMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_BOOK = 0;
   private static final int METHODID_SEARCH_BOOK = 1;
+  private static final int METHODID_DELETE_BOOK = 2;
+  private static final int METHODID_UPDATE_BOOK = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -289,6 +437,14 @@ public final class BookServiceGrpc {
         case METHODID_SEARCH_BOOK:
           serviceImpl.searchBook((com.github.traceable.crudbook.pb.SearchBookRequest) request,
               (io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.SearchBookResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_BOOK:
+          serviceImpl.deleteBook((com.github.traceable.crudbook.pb.DeleteBookRequest) request,
+              (io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.DeleteBookResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_BOOK:
+          serviceImpl.updateBook((com.github.traceable.crudbook.pb.UpdateBookRequest) request,
+              (io.grpc.stub.StreamObserver<com.github.traceable.crudbook.pb.UpdateBookResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -322,6 +478,20 @@ public final class BookServiceGrpc {
               com.github.traceable.crudbook.pb.SearchBookRequest,
               com.github.traceable.crudbook.pb.SearchBookResponse>(
                 service, METHODID_SEARCH_BOOK)))
+        .addMethod(
+          getDeleteBookMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.github.traceable.crudbook.pb.DeleteBookRequest,
+              com.github.traceable.crudbook.pb.DeleteBookResponse>(
+                service, METHODID_DELETE_BOOK)))
+        .addMethod(
+          getUpdateBookMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.github.traceable.crudbook.pb.UpdateBookRequest,
+              com.github.traceable.crudbook.pb.UpdateBookResponse>(
+                service, METHODID_UPDATE_BOOK)))
         .build();
   }
 
@@ -372,6 +542,8 @@ public final class BookServiceGrpc {
               .setSchemaDescriptor(new BookServiceFileDescriptorSupplier())
               .addMethod(getCreateBookMethod())
               .addMethod(getSearchBookMethod())
+              .addMethod(getDeleteBookMethod())
+              .addMethod(getUpdateBookMethod())
               .build();
         }
       }

@@ -7,7 +7,9 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +64,44 @@ public class BookClient {
         logger.info("Search finished.");
     }
 
+    private void deleteBook(String isbn) {
+        DeleteBookRequest request = DeleteBookRequest.newBuilder().setIsbn(isbn).build();
+        DeleteBookResponse response = DeleteBookResponse.getDefaultInstance();
+        try {
+            response = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS).deleteBook(request);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Request failed: " + e.getMessage());
+            return;
+        }
+        logger.info("Book deleted with ISBN: " + isbn);
+    }
+
+    private void updateBook(Book book, String newTitle, String newAuthors, int newNumPages) {
+        String oldTitle = book.getTitle();
+        newTitle = newTitle.isEmpty() ? oldTitle : newTitle;
+        String oldAuthors = book.getAuthors(0);
+        newAuthors = newAuthors.isEmpty() ? oldAuthors : newAuthors;
+        int oldNumPages = book.getPageCount();
+        newNumPages = newNumPages == 0 ? oldNumPages : newNumPages;
+        Book newBook = Book.newBuilder()
+                .setIsbn(book.getIsbn())
+                .setTitle(newTitle)
+                .addAuthors(newAuthors)
+                .setPageCount(newNumPages)
+                .build();
+        UpdateBookRequest request = UpdateBookRequest.newBuilder().setBook(newBook).build();
+        UpdateBookResponse response = UpdateBookResponse.getDefaultInstance();
+        try {
+            response = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS).updateBook(request);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Request failed: " + e.getMessage());
+            return;
+        }
+        logger.info("Updated the book with ISBN: " + book.getIsbn());
+    }
+
     public static void main(String[] args) throws InterruptedException {
         BookClient client = new BookClient("0.0.0.0", 8080);
         Generator generator = new Generator();
@@ -72,14 +112,28 @@ public class BookClient {
         }
         */
         try {
+
+            // Creating 10 books randomly
+            List<String> isbnList = new ArrayList<>();
+            List<Book> bookList = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 Book book = generator.NewBook();
                 client.createBook(book);
+                isbnList.add(book.getIsbn());
+                bookList.add(book);
             }
             Filter filter = Filter.newBuilder()
                     .setMinPageCount(700)
                     .build();
+
+            // Retrieving all books satisfying a filter
             client.searchBook(filter);
+
+            // Deleting the book with given isbn
+            client.deleteBook(isbnList.get(2));
+
+            // Updating an existing book
+            client.updateBook(bookList.get(5), "This is an updated title!!", "", 256);
         }
         finally {
             client.shutdown();

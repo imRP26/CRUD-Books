@@ -24,10 +24,32 @@ message SearchBookResponse {
     Book book = 1;
 }
 
+message DeleteBookRequest {
+    string isbn = 1;
+}
+
+message DeleteBookResponse {
+    string message = 1;
+}
+
+message UpdateBookRequest {
+    Book book = 1;
+}
+
+message UpdateBookResponse {
+    string message = 1;
+}
+
 service BookService {
     // unary RPC
     rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {};
 
     // server-streaming RPC
     rpc SearchBook(SearchBookRequest) returns (stream SearchBookResponse) {};
+
+    // unary RPC
+    rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {};
+
+    // unary RPC
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {};
 }

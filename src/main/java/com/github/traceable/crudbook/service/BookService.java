@@ -80,4 +80,57 @@ public class BookService extends BookServiceGrpc.BookServiceImplBase {
         responseObserver.onCompleted();
         logger.info("Book search completed!");
     }
+
+    @Override
+    public void deleteBook(DeleteBookRequest request, StreamObserver<DeleteBookResponse> responseObserver) {
+        String bookIsbn = request.getIsbn();
+        logger.info("Got a delete-book request with ISBN: " + bookIsbn);
+        if (Context.current().isCancelled()) {
+            logger.info("Request is cancelled!");
+            responseObserver.onError(Status.CANCELLED
+                    .withDescription("Request is cancelled")
+                    .asRuntimeException());
+            return;
+        }
+        try {
+            store.Delete(bookIsbn);
+        }
+        catch (Exception e) {
+            responseObserver.onError(Status.INTERNAL
+                    .withDescription(e.getMessage())
+                    .asRuntimeException());
+            return;
+        }
+        DeleteBookResponse response = DeleteBookResponse.newBuilder().setMessage(bookIsbn).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+        logger.info("Deleted book with ISBN: " + bookIsbn);
+    }
+
+    @Override
+    public void updateBook(UpdateBookRequest request, StreamObserver<UpdateBookResponse> responseObserver) {
+        Book book = request.getBook();
+        String isbn = book.getIsbn();
+        logger.info("Got an update-book request with ISBN: " + isbn);
+        if (Context.current().isCancelled()) {
+            logger.info("Request is cancelled!");
+            responseObserver.onError(Status.CANCELLED
+                    .withDescription("Request is cancelled")
+                    .asRuntimeException());
+            return;
+        }
+        try {
+            store.Update(book);
+        }
+        catch (Exception e) {
+            responseObserver.onError(Status.INTERNAL
+                    .withDescription(e.getMessage())
+                    .asRuntimeException());
+            return;
+        }
+        UpdateBookResponse response = UpdateBookResponse.newBuilder().setMessage(isbn).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+        logger.info("Updated book with ISBN: " + isbn);
+    }
 }

@@ -1,9 +1,6 @@
 package com.github.traceable.crudbook.service;
 
-import com.github.traceable.crudbook.pb.CreateBookRequest;
-import com.github.traceable.crudbook.pb.CreateBookResponse;
-import com.github.traceable.crudbook.pb.Book;
-import com.github.traceable.crudbook.pb.BookServiceGrpc;
+import com.github.traceable.crudbook.pb.*;
 import com.github.traceable.crudbook.sample.Generator;
 import io.grpc.*;
 import io.grpc.inprocess.InProcessChannelBuilder;
@@ -43,7 +40,7 @@ public class BookServerTest {
     }
 
     @Test
-    public void createBookWithAValidID() {
+    public void createBookWithAValidISBN() {
         Generator generator = new Generator();
         Book book = generator.NewBook();
         CreateBookRequest request = CreateBookRequest.newBuilder().setBook(book).build();
@@ -56,7 +53,7 @@ public class BookServerTest {
     }
 
     @Test
-    public void createBookWithAnEmptyID() {
+    public void createBookWithAnEmptyISBN() {
         Generator generator = new Generator();
         Book book = generator.NewBook().toBuilder().setIsbn("").build();
         CreateBookRequest request = CreateBookRequest.newBuilder().setBook(book).build();
@@ -69,7 +66,7 @@ public class BookServerTest {
     }
 
     @Test(expected = StatusRuntimeException.class)
-    public void createBookWithAnInvalidID() {
+    public void createBookWithAnInvalidISBN() {
         Generator generator = new Generator();
         Book book = generator.NewBook().toBuilder().setIsbn("RP").build();
         CreateBookRequest request = CreateBookRequest.newBuilder().setBook(book).build();
@@ -85,12 +82,39 @@ public class BookServerTest {
     }
 
     @Test(expected = StatusRuntimeException.class)
-    public void createBookWithAnAlreadyExistsID() throws Exception {
+    public void createBookWithAnAlreadyExistsISBN() throws Exception {
         Generator generator = new Generator();
         Book book = generator.NewBook();
         store.Save(book);
         CreateBookRequest request = CreateBookRequest.newBuilder().setBook(book).build();
         BookServiceGrpc.BookServiceBlockingStub stub = BookServiceGrpc.newBlockingStub(channel);
         CreateBookResponse response = stub.createBook(request);
+    }
+
+    @Test
+    public void deleteBookWithAValidISBN() throws Exception {
+        Generator generator = new Generator();
+        Book book = generator.NewBook();
+        CreateBookRequest request1 = CreateBookRequest.newBuilder().setBook(book).build();
+        BookServiceGrpc.BookServiceBlockingStub stub1 = BookServiceGrpc.newBlockingStub(channel);
+        CreateBookResponse response1 = stub1.createBook(request1);
+        DeleteBookRequest request2 = DeleteBookRequest.newBuilder().setIsbn(book.getIsbn()).build();
+        BookServiceGrpc.BookServiceBlockingStub stub2 = BookServiceGrpc.newBlockingStub(channel);
+        DeleteBookResponse response2 = stub2.deleteBook(request2);
+        assertNotNull(response2);
+        Book wasFound = store.Find(book.getIsbn());
+        assertNull(wasFound);
+    }
+
+    @Test(expected = StatusRuntimeException.class)
+    public void deleteBookWithAnInValidISBN() {
+        Generator generator = new Generator();
+        Book book = generator.NewBook();
+        CreateBookRequest request1 = CreateBookRequest.newBuilder().setBook(book).build();
+        BookServiceGrpc.BookServiceBlockingStub stub1 = BookServiceGrpc.newBlockingStub(channel);
+        CreateBookResponse response1 = stub1.createBook(request1);
+        DeleteBookRequest request2 = DeleteBookRequest.newBuilder().setIsbn(book.getIsbn() + '#').build();
+        BookServiceGrpc.BookServiceBlockingStub stub2 = BookServiceGrpc.newBlockingStub(channel);
+        DeleteBookResponse response2 = stub2.deleteBook(request2);
     }
 }

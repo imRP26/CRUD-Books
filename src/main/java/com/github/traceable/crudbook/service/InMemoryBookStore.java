@@ -49,4 +49,19 @@ public class InMemoryBookStore implements BookStore {
                 stream.Send(book.toBuilder().build());
         }
     }
+
+    @Override
+    public void Delete(String isbn) {
+        if (!data.containsKey(isbn))
+            throw new DoesNotExistException("Book ISBN does not exist!");
+        data.remove(isbn);
+    }
+
+    @Override
+    public void Update(Book book) {
+        if (!data.containsKey(book.getIsbn()))
+            throw new DoesNotExistException("Book ISBN does not exist!");
+        Book other = book.toBuilder().build(); // deep copy
+        data.put(other.getIsbn(), other);
+    }
 }

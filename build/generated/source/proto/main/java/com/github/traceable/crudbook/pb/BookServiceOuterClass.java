@@ -45,6 +45,26 @@ public final class BookServiceOuterClass {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_traceable_crudbook_SearchBookResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_traceable_crudbook_DeleteBookRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_traceable_crudbook_DeleteBookRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_traceable_crudbook_DeleteBookResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_traceable_crudbook_DeleteBookResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_traceable_crudbook_UpdateBookRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_traceable_crudbook_UpdateBookRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_traceable_crudbook_UpdateBookResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_traceable_crudbook_UpdateBookResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -61,13 +81,23 @@ public final class BookServiceOuterClass {
       "ponse\022\014\n\004isbn\030\001 \001(\t\"?\n\021SearchBookRequest" +
       "\022*\n\006filter\030\001 \001(\0132\032.traceable.crudbook.Fi" +
       "lter\"<\n\022SearchBookResponse\022&\n\004book\030\001 \001(\013" +
-      "2\030.traceable.crudbook.Book2\315\001\n\013BookServi" +
-      "ce\022]\n\nCreateBook\022%.traceable.crudbook.Cr" +
-      "eateBookRequest\032&.traceable.crudbook.Cre" +
-      "ateBookResponse\"\000\022_\n\nSearchBook\022%.tracea" +
-      "ble.crudbook.SearchBookRequest\032&.traceab" +
-      "le.crudbook.SearchBookResponse\"\0000\001B$\n co" +
-      "m.github.traceable.crudbook.pbP\001b\006proto3"
+      "2\030.traceable.crudbook.Book\"!\n\021DeleteBook" +
+      "Request\022\014\n\004isbn\030\001 \001(\t\"%\n\022DeleteBookRespo" +
+      "nse\022\017\n\007message\030\001 \001(\t\";\n\021UpdateBookReques" +
+      "t\022&\n\004book\030\001 \001(\0132\030.traceable.crudbook.Boo" +
+      "k\"%\n\022UpdateBookResponse\022\017\n\007message\030\001 \001(\t" +
+      "2\213\003\n\013BookService\022]\n\nCreateBook\022%.traceab" +
+      "le.crudbook.CreateBookRequest\032&.traceabl" +
+      "e.crudbook.CreateBookResponse\"\000\022_\n\nSearc" +
+      "hBook\022%.traceable.crudbook.SearchBookReq" +
+      "uest\032&.traceable.crudbook.SearchBookResp" +
+      "onse\"\0000\001\022]\n\nDeleteBook\022%.traceable.crudb" +
+      "ook.DeleteBookRequest\032&.traceable.crudbo" +
+      "ok.DeleteBookResponse\"\000\022]\n\nUpdateBook\022%." +
+      "traceable.crudbook.UpdateBookRequest\032&.t" +
+      "raceable.crudbook.UpdateBookResponse\"\000B$" +
+      "\n com.github.traceable.crudbook.pbP\001b\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -99,6 +129,30 @@ public final class BookServiceOuterClass {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_traceable_crudbook_SearchBookResponse_descriptor,
         new java.lang.String[] { "Book", });
+    internal_static_traceable_crudbook_DeleteBookRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_traceable_crudbook_DeleteBookRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_traceable_crudbook_DeleteBookRequest_descriptor,
+        new java.lang.String[] { "Isbn", });
+    internal_static_traceable_crudbook_DeleteBookResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_traceable_crudbook_DeleteBookResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_traceable_crudbook_DeleteBookResponse_descriptor,
+        new java.lang.String[] { "Message", });
+    internal_static_traceable_crudbook_UpdateBookRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_traceable_crudbook_UpdateBookRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_traceable_crudbook_UpdateBookRequest_descriptor,
+        new java.lang.String[] { "Book", });
+    internal_static_traceable_crudbook_UpdateBookResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_traceable_crudbook_UpdateBookResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_traceable_crudbook_UpdateBookResponse_descriptor,
+        new java.lang.String[] { "Message", });
     descriptor.resolveAllFeaturesImmutable();
     com.github.traceable.crudbook.pb.BookMessage.getDescriptor();
     com.github.traceable.crudbook.pb.FilterMessage.getDescriptor();
